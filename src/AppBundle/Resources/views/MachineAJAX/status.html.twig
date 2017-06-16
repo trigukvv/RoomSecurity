@@ -1,0 +1,32 @@
+{% if machineService.machineAlarmIsTriggered(machine) %}
+    <div class="alert alert-danger"> ТРЕВОГА!!! Сработала СИГНАЛИЗАЦИЯ!!! </div>
+{% else %}
+    <div class="alert alert-info"> Все в порядке, тревоги нет. </div>
+{% endif %} 
+
+{% if machineService.machineAlarmIsEnabled(machine) %}
+    <div class="alert alert-success">Сигнализация включена </div>
+{% else %}
+    <div class="alert alert-info">Сигнализация выключена</div>
+{% endif %} 
+<table class="table">
+{% for sensor in machine.sensors %}
+    <tr>
+        <th>
+            {{ sensor.title}}
+        </th>
+        <td>
+            {% if sensorService.sensorAlarmIsTriggered(sensor) %}
+                {% if machineService.machineAlarmIsEnabled(machine) %}
+                    <div class="alert alert-danger"> ТРЕВОГА!!! Сработала СИГНАЛИЗАЦИЯ!!! </div>
+                {% else %}
+                    <div class="alert alert-warning"> Датчик сообщает о срабатывании </div>
+                {% endif %}
+            {% else %}
+             Все в порядке.
+            {% endif %} 
+        </td>
+    </tr>
+            
+{% endfor %}
+</table>

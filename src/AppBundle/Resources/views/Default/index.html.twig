@@ -1,0 +1,50 @@
+{% extends baseTemplate %}
+{% block body %}
+{% if machines and machines|length>0 %}
+<div class="container-fluid">
+{% for machine in machines %}
+
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        {{ machine.title}}
+    </div>
+    <div class="panel-body">
+        <p>{{ machine.description }}</p>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="machine{{machine.id}}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <button type="button" class="btn btn-block btn-lg" 
+                        onclick="window.location='{{ path('disableAlarmByUser',{'machine':machine.id}) }}';">
+                            Выключить сигнализацию
+                    </button>   
+                    <button type="button" class="btn btn-block btn-lg" 
+                        onclick="window.location='{{ path('enableAlarmByUser',{'machine':machine.id}) }}';">
+                        Включить сигнализацию  
+                    </button> 
+                
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endfor %} 
+{% else %}
+<div class="panel panel-warning ">
+    <div class="panel-heading">
+        Предупреждение
+    </div>
+    <div class="panel-body">
+        Вы не являетесь владельцем ни одного аппаратного комплекса, просмотр состояний недоступен.
+    </div>
+
+</div>
+{% endif %}
+{% endblock %}

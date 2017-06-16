@@ -1,0 +1,13 @@
+{% if listItems and listItems|length > 0 %}
+<aside class="col-md-3" id="aside">
+    <section class="panel panel-danger">
+        <div class="panel-heading">Администрирование</div>
+        <div class="list-group">
+        {% for listItem in listItems %}
+            <a href="{{listItem['path']}}" class="list-group-item"> {{listItem['title']}} </a>
+        {% endfor %}
+        </div>
+            
+    </section>
+</aside>
+{% endif %}
